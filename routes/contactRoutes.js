@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
     await newContact.save();
 
     try {
-      await sendEmail({ name, email, message });
+        if (process.env.NODE_ENV !== "production") await sendEmail({ name, email, message });
     } catch (emailError) {
       console.error("Email failed:", emailError.message);
     }
